@@ -6,6 +6,11 @@ function App() {
     lName: "",
     email: ""
   });
+  const [displayContact, setDisplayContact] = useState({
+    fName: "",
+    lName: "",
+    email: ""
+  });
 
   function handleOnChange(event) {
     const {name, value} = event.target;
@@ -33,12 +38,19 @@ function App() {
     });
   }
 
+  function handleClick(event){
+    
+    setDisplayContact(contact);
+    //prevent page from relaoding after submitting form values
+    event.preventDefault();
+  }
+
   return (
     <div className="container">
       <h1>
-        Hello {contact.fName} {contact.lName}
+        Hello {displayContact.fName} {displayContact.lName}
       </h1>
-      <p>{contact.email}</p>
+      <p>{displayContact.email}</p>
       <form>
         <input
           onChange={handleOnChange}
@@ -48,7 +60,7 @@ function App() {
         />
         <input onChange={handleOnChange} name="lName" placeholder="Last Name" value={contact.lName} />
         <input onChange={handleOnChange} name="email" placeholder="Email" value={contact.email} />
-        <button>Submit</button>
+        <button onClick={handleClick}>Submit</button>
       </form>
     </div>
   );
