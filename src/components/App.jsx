@@ -13,33 +13,17 @@ function App() {
   });
 
   function handleOnChange(event) {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
     setContact((previousValue) => {
-      if (name === "fName")
-        return {
-          fName: value,
-          lName: previousValue.lName,
-          email: previousValue.email
-        };
-      else if (name === "lName") {
-        return {
-          fName: previousValue.fName,
-          lName: value,
-          email: previousValue.email
-        };
-      } else {
-        return {
-          fName: previousValue.fName,
-          lName: previousValue.lName,
-          email: value
-        };
-      }
+      return {
+        ...previousValue,
+        [name]: value
+      };
     });
   }
 
-  function handleClick(event){
-    
+  function handleClick(event) {
     setDisplayContact(contact);
     //prevent page from relaoding after submitting form values
     event.preventDefault();
@@ -58,8 +42,18 @@ function App() {
           placeholder="First Name"
           value={contact.fName}
         />
-        <input onChange={handleOnChange} name="lName" placeholder="Last Name" value={contact.lName} />
-        <input onChange={handleOnChange} name="email" placeholder="Email" value={contact.email} />
+        <input
+          onChange={handleOnChange}
+          name="lName"
+          placeholder="Last Name"
+          value={contact.lName}
+        />
+        <input
+          onChange={handleOnChange}
+          name="email"
+          placeholder="Email"
+          value={contact.email}
+        />
         <button onClick={handleClick}>Submit</button>
       </form>
     </div>
